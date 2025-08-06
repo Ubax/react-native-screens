@@ -1,6 +1,13 @@
 import React from 'react';
-import type { NativeSyntheticEvent } from 'react-native';
 import {
+  Alert,
+  Pressable,
+  Text,
+  View,
+  type NativeSyntheticEvent,
+} from 'react-native';
+import {
+  BottomTabsAccessory,
   BottomTabs,
   BottomTabsScreen,
   BottomTabsScreenProps,
@@ -91,9 +98,7 @@ export function BottomTabsContainer(props: BottomTabsContainerProps) {
       tabBarItemTitleFontWeight="700"
       tabBarItemLabelVisibilityMode="auto"
       tabBarMinimizeBehavior="onScrollDown"
-      experimentalControlNavigationStateInJS={
-        configWrapper.config.controlledBottomTabs
-      }>
+      experimentalControlNavigationStateInJS={false}>
       {props.tabConfigs.map(tabConfig => {
         const tabKey = tabConfig.tabScreenProps.tabKey;
         const isFocused = tabConfig.tabScreenProps.tabKey === focusedTabKey;
@@ -111,6 +116,27 @@ export function BottomTabsContainer(props: BottomTabsContainerProps) {
             isFocused={isFocused} // notice that the value passed by user is overriden here!
           >
             <ContentComponent/>
+            <BottomTabsAccessory
+              onTabAccessoryEnvironmentChange={console.log}
+              style={{ borderRadius: 24 }}>
+              <View style={{ flex: 1, padding: 12, flexDirection: 'row' }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                  }}>
+                  Left {tabKey}
+                </Text>
+                <View style={{ flex: 1 }} />
+                <Text
+                  style={{
+                    fontSize: 16,
+                  }}>
+                  <Pressable onPress={() => Alert.alert('Pressable pressed!')}>
+                    <Text style={{ fontSize: 24 }}>▶</Text>
+                  </Pressable>
+                </Text>
+              </View>
+            </BottomTabsAccessory>
           </BottomTabsScreen>
         );
       })}

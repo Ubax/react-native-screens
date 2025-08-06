@@ -1,4 +1,5 @@
 #import <React/RCTImageSource.h>
+#import "RNSBottomTabsAccessoryComponentView.h"
 #import "RNSBottomTabsScreenEventEmitter.h"
 #import "RNSEnums.h"
 #import "RNSReactBaseView.h"
@@ -32,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
  * View controller responsible for managing tab represented by this component view.
  */
 @property (nonatomic, strong, readonly, nullable) RNSTabsScreenViewController *controller;
+
+/**
+ * Bottom accessory component view that is rendered above bottom tabs.
+ */
+@property (nonatomic, strong, readonly, nullable) RNSBottomTabsAccessoryComponentView *bottomAccessory;
 
 /**
  * If not null, the bottom tabs host view that this tab component view belongs to.

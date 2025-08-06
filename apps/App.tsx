@@ -3,7 +3,7 @@ import { enableFreeze } from 'react-native-screens';
 import Example from './Example';
 // import * as Test from './src/tests';
 
-enableFreeze(true);
+enableFreeze(false);
 
 export default function App() {
   return <Example />;

@@ -1,8 +1,8 @@
 #import "RNSTabBarController.h"
 #import <React/RCTAssert.h>
 #import <React/RCTLog.h>
-#import "RNSScreenWindowTraits.h"
 #import "RNSLog.h"
+#import "RNSScreenWindowTraits.h"
 
 @implementation RNSTabBarController {
   NSArray<RNSTabsScreenViewController *> *_Nullable _tabScreenControllers;
@@ -153,6 +153,15 @@
   RCTAssert(selectedViewController != nil, @"[RNScreens] No selected view controller!");
 
   RNSLog(@"Change selected view controller to: %@", selectedViewController);
+
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_26_0) && \
+    __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_26_0
+  if (@available(iOS 26.0, *)) {
+    UITabAccessory *tabAccessory =
+        [[UITabAccessory alloc] initWithContentView:selectedViewController.tabScreenComponentView.bottomAccessory];
+    [self setBottomAccessory:tabAccessory animated:YES];
+  }
+#endif
 
   [selectedViewController.tabScreenComponentView overrideScrollViewBehaviorInFirstDescendantChainIfNeeded];
   [self setSelectedViewController:selectedViewController];
