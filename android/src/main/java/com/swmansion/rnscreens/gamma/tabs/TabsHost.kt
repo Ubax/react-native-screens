@@ -88,7 +88,7 @@ class TabsHost(
     private val wrappedContext =
         ContextThemeWrapper(
             reactContext,
-            com.google.android.material.R.style.Theme_Material3_DayNight_NoActionBar,
+            com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar,
         )
 
     private val bottomNavigationView: BottomNavigationView =
@@ -375,15 +375,15 @@ class TabsHost(
             // update the appearance when user toggles between dark/light mode
             when (uiMode) {
                 Configuration.UI_MODE_NIGHT_YES -> {
-                    wrappedContext.setTheme(com.google.android.material.R.style.Theme_Material3_Dark_NoActionBar)
+                    wrappedContext.setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_Dark_NoActionBar)
                 }
 
                 Configuration.UI_MODE_NIGHT_NO -> {
-                    wrappedContext.setTheme(com.google.android.material.R.style.Theme_Material3_Light_NoActionBar)
+                    wrappedContext.setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_Light_NoActionBar)
                 }
 
                 else -> {
-                    wrappedContext.setTheme(com.google.android.material.R.style.Theme_Material3_DayNight_NoActionBar)
+                    wrappedContext.setTheme(com.google.android.material.R.style.Theme_Material3_DynamicColors_DayNight_NoActionBar)
                 }
             }
 
