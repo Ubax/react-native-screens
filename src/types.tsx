@@ -562,6 +562,7 @@ export interface ScreenProps extends ViewProps {
    * @platform android
    */
   unstable_sheetFooter?: () => React.ReactNode;
+  zoomTransitionViewNativeTag?: number;
 }
 
 export interface ScreenContainerProps extends ViewProps {

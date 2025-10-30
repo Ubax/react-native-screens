@@ -1461,6 +1461,15 @@ RNS_IGNORE_SUPER_CALL_END
                                                  newScreenProps.topScrollEdgeEffect]];
   }
 
+  if (newScreenProps.zoomTransitionViewNativeTag != oldScreenProps.zoomTransitionViewNativeTag) {
+    self.zoomNativeTag = newScreenProps.zoomTransitionViewNativeTag;
+    // If reactViewController is RNScreen, then call enableZoomTransition on it - true if zoomNativeTag > 0
+    if ([self reactViewController] && [[self reactViewController] isKindOfClass:[RNSScreen class]]) {
+      RNSScreen *parentScreen = (RNSScreen *)[self reactViewController];
+      [parentScreen enableZoomTransition:self.zoomNativeTag > 0];
+    }
+  }
+
   [super updateProps:props oldProps:oldProps];
 }
 
@@ -1594,6 +1603,24 @@ Class<RCTComponentViewProtocol> RNSScreenCls(void)
 #endif
   }
   return self;
+}
+
+- (void)enableZoomTransition:(BOOL)shouldEnable
+{
+  if (shouldEnable) {
+    self.preferredTransition = [UIViewControllerTransition
+           zoomWithOptions:nil
+        sourceViewProvider:^UIView *_Nullable(UIZoomTransitionSourceViewProviderContext *context) {
+          if (self.screenView.zoomNativeTag > 0) {
+            NSInteger zoomTag = self.screenView.zoomNativeTag;
+            UIView *view = [self.navigationController.view viewWithTag:zoomTag];
+            return view;
+          }
+          return nullptr;
+        }];
+  } else {
+    self.preferredTransition = nil;
+  }
 }
 
 // TODO: Find out why this is executed when screen is going out

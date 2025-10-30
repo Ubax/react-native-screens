@@ -265,6 +265,7 @@ export const InnerScreen = React.forwardRef<View, ScreenProps>(
             leftScrollEdgeEffect={scrollEdgeEffects?.left}
             rightScrollEdgeEffect={scrollEdgeEffects?.right}
             topScrollEdgeEffect={scrollEdgeEffects?.top}
+            zoomTransitionViewNativeTag={props.zoomTransitionViewNativeTag ?? 0}
             synchronousShadowStateUpdatesEnabled={
               featureFlags.experiment.synchronousScreenUpdatesEnabled
             }>

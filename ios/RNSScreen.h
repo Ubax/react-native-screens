@@ -55,6 +55,7 @@ namespace react = facebook::react;
 #ifdef RCT_NEW_ARCH_ENABLED
 - (void)setViewToSnapshot;
 - (CGFloat)calculateHeaderHeightIsModal:(BOOL)isModal;
+- (void)enableZoomTransition:(BOOL)shouldEnable;
 #endif
 
 @end
@@ -122,6 +123,7 @@ namespace react = facebook::react;
 @property (nonatomic) NSInteger sheetInitialDetent;
 @property (nonatomic) BOOL sheetExpandsWhenScrolledToEdge;
 #endif // !TARGET_OS_TV
+@property (nonatomic) NSInteger zoomNativeTag;
 
 #ifdef RCT_NEW_ARCH_ENABLED
 // we recreate the behavior of `reactSetFrame` on new architecture
